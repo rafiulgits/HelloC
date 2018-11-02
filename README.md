@@ -1,4 +1,3 @@
-# Hello C:
 ## [Wikis](https://github.com/rafiulgits/HelloC/wiki)
   * ### [string in c](https://github.com/rafiulgits/HelloC/wiki/Working-with-string)
   * ### [pointer in c](https://github.com/rafiulgits/HelloC/wiki/Working-with-pointer)
