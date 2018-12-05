@@ -62,7 +62,7 @@ void command_list()
     fprintf(stdout,"    \tProcess List\t\tpslist\n");
     fprintf(stdout,"    \tHelp\t\t\thelp\n");
     fprintf(stdout,"    \tOpen Notepad\t\tnotepad\n");
-    fprintf(stdout,"    \tCreate Process\t\tps_create *location\n");
+    fprintf(stdout,"    \tCreate Process\t\tps_create\n");
     fprintf(stdout,"    \tStop Process\t\tps_kill\n");
 }
 int tokenization(char *command)
