@@ -16,6 +16,7 @@ const char delim[] = " -:";
 char ntpd[] = "C:\\WINDOWS\\system32\\notepad.exe";
 
 HANDLE color_handle;
+BOOL running;
 
 void console_mode(WORD mode);
 int tokenization(char *command);
@@ -23,18 +24,24 @@ void command_list();
 BOOL compare(char *s1, char *s2);
 BOOL processCreator(char *executer_path);
 char* copy(char *s);
-void killProcess(UINT id);
+BOOL killProcess(UINT id);
 
 int main()
 {
     color_handle = GetStdHandle(STD_OUTPUT_HANDLE);
     console_mode(_COMMAND_LINE);
-    fprintf(stdout,"C-Shell for Windows OS\n(c) 2018 Rafiul Islam\n\n");
+    fprintf(stdout,"\nC-Shell for Windows OS\n(c) 2018 Rafiul Islam\n\n");
     char command[_BUFFER];
-    while(1)
+    running = TRUE;
+    while(running)
     {
         fprintf(stdout, "[in] ");
         gets(command);
+        if(strlen(command) == 0)
+        {
+            fprintf(stdout,"\n");
+            continue;
+        }
         switch(tokenization(command))
         {
             case _ERROR:{
@@ -59,9 +66,9 @@ void console_mode(WORD mode)
 void command_list()
 {
     fprintf(stdout,"[out]\tTask\t\t\tCommand\n\t------------\t\t-------------\n");
-    fprintf(stdout,"    \tProcess List\t\tpslist\n");
     fprintf(stdout,"    \tHelp\t\t\thelp\n");
     fprintf(stdout,"    \tOpen Notepad\t\tnotepad\n");
+    fprintf(stdout,"    \tProcess List\t\tps_list\n");
     fprintf(stdout,"    \tCreate Process\t\tps_create\n");
     fprintf(stdout,"    \tStop Process\t\tps_kill\n");
 }
@@ -80,7 +87,7 @@ int tokenization(char *command)
         }
         return HELP;
     }
-    if(compare("pslist", tokens))
+    if(compare("ps_list", tokens))
     {
         tokens = strtok(NULL, delim);
         if(tokens != NULL)
@@ -154,7 +161,26 @@ int tokenization(char *command)
         fprintf(stdout,"[id] ");
         UINT id;
         fscanf(stdin, "%u", &id);
-        killProcess(id);
+        if(killProcess(id))
+        {
+            fprintf(stdout, "[out] process killed\n");
+        }
+        else
+        {
+            console_mode(_ERROR_LINE);
+            fprintf(stderr, "[err] failed to kill the process\n");
+            console_mode(_COMMAND_LINE);
+        }
+        return _NO_RETURN_;
+    }
+    if(compare("exit", tokens))
+    {
+        tokens = strtok(NULL, delim);
+        if(tokens != NULL)
+        {
+            return _ERROR;
+        }
+        running = FALSE;
         return _NO_RETURN_;
     }
     return -1;
@@ -205,7 +231,7 @@ BOOL processCreator(char *executer_path)
     return TRUE;
 }
 
-void killProcess(UINT id)
+BOOL killProcess(UINT id)
 {
     /**
         @see https://github.com/rafiulgits/HelloC/blob/master/system/windows/process_killer.c
@@ -213,13 +239,9 @@ void killProcess(UINT id)
     HANDLE process;
     process = OpenProcess(PROCESS_ALL_ACCESS, FALSE, id);
     if(!TerminateProcess(process,1)){
-        console_mode(_ERROR_LINE);
-        fprintf(stderr, "[err] failed to kill the process\n");
         CloseHandle(process);
-        console_mode(_COMMAND_LINE);
-        return;
+        return FALSE;
     }
     CloseHandle(process);
-    fprintf(stdout, "[out] process killed\n");
-    return;
+    return TRUE;
 }
