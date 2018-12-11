@@ -1,5 +1,6 @@
-## :flags: HelloC
+# :flags: HelloC
 #### explore c functionality and system programming with c system API's
+***
 ### :pager: [Wikis](https://github.com/rafiulgits/HelloC/wiki)
   * [string in c](https://github.com/rafiulgits/HelloC/wiki/Working-with-string)
   * [pointer in c](https://github.com/rafiulgits/HelloC/wiki/Working-with-pointer)
@@ -9,11 +10,11 @@
   * [Storage types and data types qualifiers](https://github.com/rafiulgits/HelloC/wiki/Data-Type-Qualifiers-and-Storage-Class-Specifier)
   
 ***
-### :computer: C-Shell
+## :computer: [C-Shell](https://github.com/rafiulgits/HelloC/tree/master/c-shell)
 Shell experience with C in windows operating system.
 ![shell](https://github.com/rafiulgits/HelloC/blob/master/c-shell/shell.jpg)
 
-##### :grey_question: How to use:
+### :mag_right: How to use
  * Get help 
  ```c
  [in] help
