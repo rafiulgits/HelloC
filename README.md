@@ -12,7 +12,7 @@
 ***
 ## :computer: [C-Shell](https://github.com/rafiulgits/HelloC/tree/master/c-shell)
 Shell experience with C in windows operating system.
-![shell](https://github.com/rafiulgits/HelloC/blob/master/c-shell/shell.jpg)
+![shell](https://github.com/rafiulgits/HelloC/blob/master/c-shell/sc.png)
 
 ### :mag_right: How to use
  * Get help 
